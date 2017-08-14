@@ -1,0 +1,58 @@
+select * from  mchk  where danwbh='KY0014-09'   --DWI00004493
+
+select * from mchk where danwbh='K16013-12'
+select * from pf_ckhz where djbh='XSAZDA00040161'
+
+update  pf_ckhz  set shhdzh='麻城市南正街下关厢348号'  , dwbh ='DWI00004493' where  djbh='XSAZDA00040161'
+
+select  *  from  pf_ckmx  where djbh ='XSAZDA00040161'  --GCKZDA00040204     XSGZDA00040269  
+
+select *  from   pf_djhz where djbh='XSGZDA00040269'
+
+update pf_djhz set  shhdzh='麻城市南正街下关厢348号' , dwbh ='DWI00004493'  where  djbh='XSGZDA00040269'
+
+select * from  jxddhz  where djbh='XSFZDA00038928'
+
+update jxddhz set shhdzh='麻城市南正街下关厢348号'  , dwbh ='DWI00004493' where   djbh='XSFZDA00038928'
+
+
+
+select * from  spls_ck   where djbh='XSAZDA00040161'
+
+update spls_ck set dwbh='DWI00004493' where djbh='XSAZDA00040161'
+
+select * from   GSP_ckfh where djbh='GCKZDA00040204'
+
+update GSP_CKFH set dwbh='DWI00004493' where djbh='GCKZDA00040204'
+
+
+select * from  cwk  where  djbh='XSAZDA00040161'
+
+update cwk  set dwbh='DWI00004493' where djbh='XSAZDA00040161'
+
+select  *    from   mxysyf  where   djbh='XSAZDA00040161'
+
+update mxysyf  set dwbh='DWI00004493' where djbh='XSAZDA00040161'
+
+select * from jzorder_hz_his  where djbh='XSGZDA00040269'
+
+update jzorder_hz_his   set dwbh='DWI00004493' where djbh='XSGZDA00040269'
+
+select * from  jzorder_mx_his where djbh='XSGZDA00040397'
+
+select * from GSP_CKYS_MX  where djbh='GYUZDA00008446'  and xgdjbh='XSAZDA00040161'
+
+update GSP_CKYS_MX set danwbh='KY0014-09' ,dwmch='麻城市鼓楼街道办事处南正街社区卫生服务中心',
+
+shhdzh='麻城市南正街下关厢348号' where djbh='GYUZDA00008446'  and xgdjbh='XSAZDA00040161'
+
+
+
+
+select * from   tmp_bill_CX_YingS_DW_dssub1    
+
+select   * from wlzhk  where rq='2017-06-02'  and djbh='XSAZDA00040161'
+
+update wlzhk set dwbh='DWI00004493' where rq='2017-06-02'  and djbh='XSAZDA00040161'    --jzhh
+
+  

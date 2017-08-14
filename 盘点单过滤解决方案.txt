@@ -1,0 +1,69 @@
+spbh char(11) null default ''
+
+--  添加字典
+  insert into gldict (fdname ,dictlist ,bianh ,is_mr ,xlh )
+  values ('filters','非中药商品','filters','否','0')
+
+--修改存储过程  procedure [dbo].[SOF_autogetmx]
+else if @filters='非中药商品'  
+     delete #tmp_pdmx where spbh like 'zy%' 
+
+ insert into #tmp_pdmx(spid,spbh,pihao,sxrq,shpshl,shpje,zhmshl,zhmje,chbdj,jwh)  
+         select b.spid,d.spbh,isnull(c.pihao,'') as pihao,isnull(c.sxrq,'') as sxrq,@tmp_zoo as shpshl,  
+                @tmp_zoo as shpje,isnull(c.shl,0) as zhmshl,  
+                isnull(c.shl,0)*isnull(b.chbdj,0) as zhmje,  
+                isnull(b.chbdj,0) as chbdj,b.jwh  
+     from hwsp b left join sphwph c on b.spid=c.spid and b.hw=c.hw  join spkfk d on b.spid=d.spid  
+     where  b.hw=@hw  
+  
+    else if @gl_pihao='是'  
+  
+         insert into #tmp_pdmx(spid,spbh,pihao,sxrq,shpshl,shpje,zhmshl,zhmje,chbdj,jwh)  
+         select b.spid,d.spbh,isnull(c.pihao,'') as pihao,isnull(c.sxrq,'') as sxrq,@tmp_zoo as shpshl,  
+                @tmp_zoo as shpje,isnull(c.shl,0) as zhmshl,  
+                --isnull(c.shl,0)*(case when isnull(c.gebjj,0)>0 then isnull(c.gebjj,0) else isnull(b.chbdj,0) end) as zhmje,  
+                --case when isnull(c.gebjj,0)>0 then isnull(c.gebjj,0) else isnull(b.chbdj,0) end as chbdj,
+				isnull(c.shl,0)*isnull(b.chbdj,0) as zhmje,isnull(b.chbdj,0) as chbdj,
+				b.jwh  
+          from hwsp b left join sphwph c on b.spid=c.spid and b.hw=c.hw  join spkfk d on b.spid =d.spid  
+          where  b.hw=@hw  
+  
+    else  
+      insert into #tmp_pdmx(spid,spbh,shpshl,shpje,zhmshl,zhmje,chbdj,jwh)  
+      select b.spid,d.spbh,@tmp_zoo as shpshl,  @tmp_zoo as shpje,isnull(b.hwshl,0) as zhmshl,  
+       isnull(b.hwje,0) as zhmje,isnull(b.chbdj,0) as chbdj,b.jwh  
+      from hwsp b join spkfk d on b.spid =d.spid 
+      where b.hw=@hw  
+   
+    if @jwh<>''  
+     delete #tmp_pdmx where jwh not like rtrim(@jwh) + '%'  
+   
+    if @plid<>''  
+     delete #tmp_pdmx where spid not in (select spid from sp_pinleimx where plid=@plid)   
+   
+ --   if @filters='所有商品' or isnull(@filters,'')=''  
+ --   begin  
+ --   end  
+    if @filters='帐面数量大于零商品'  
+     delete #tmp_pdmx where  zhmshl<=0  
+    else if @filters='帐面数量等于零商品'  
+     delete #tmp_pdmx where  zhmshl<>0  
+    else if @filters='帐面数量小于零商品'  
+     delete #tmp_pdmx where  zhmshl>=0  
+    else if @filters='数量不等于零'  
+     delete #tmp_pdmx where  zhmshl=0  
+    else if @filters='中药除外的所有商品'  
+     delete #tmp_pdmx where spbh like 'zy%'  
+    -- 将已经存在于其他盘点方案中的记录删除掉；  
+    delete #tmp_pdmx from pdhz a,pdmx b where a.djbh=b.djbh and a.hw=@hw and b.pdbz<>'是' and #tmp_pdmx.spid=b.spid and #tmp_pdmx.pihao=b.pihao  
+    -- 关联相关条件返回；  
+    if @shxtj=''  
+     select convert(int,substring(b.spid,8,8)) as dj_sort, b.spbh,b.spmch,b.shpgg,b.shpchd,b.dw,b.jlgg,b.lshj,b.wdid,a.*   
+      from #tmp_pdmx a,spkfk b   
+      where a.spid=b.spid and b.beactive='是'  order by a.spbh
+    else   
+     select convert(int,substring(b.spid,8,8)) as dj_sort,b.spbh,b.spmch,b.shpgg,b.shpchd,b.dw,b.jlgg,b.lshj,b.wdid,a.*   
+      from #tmp_pdmx a,spkfk b   
+      where a.spid=b.spid and b.spbh like rtrim(@shxtj)+'%' and b.beactive='是'  order by a.spbh
+    drop table #tmp_pdmx  
+   end  
