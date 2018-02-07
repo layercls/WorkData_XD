@@ -1,0 +1,10 @@
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\XD_Extend\XD_Extend_Web\bin\XD_Extend_Web.dll
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\XD_Extend\XD_Extend_Web\bin\XD_Extend_Web.pdb
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\XD_Extend\XD_Extend_Web\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\XD_Extend\XD_Extend_Web\obj\Debug\XD_Extend_Web.dll
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\XD_Extend\XD_Extend_Web\obj\Debug\XD_Extend_Web.pdb
+E:\gb\WorkData_XD\XD_Extend\XD_Extend_Web\bin\XD_Extend_Web.dll
+E:\gb\WorkData_XD\XD_Extend\XD_Extend_Web\bin\XD_Extend_Web.pdb
+E:\gb\WorkData_XD\XD_Extend\XD_Extend_Web\obj\Debug\ResolveAssemblyReference.cache
+E:\gb\WorkData_XD\XD_Extend\XD_Extend_Web\obj\Debug\XD_Extend_Web.dll
+E:\gb\WorkData_XD\XD_Extend\XD_Extend_Web\obj\Debug\XD_Extend_Web.pdb
