@@ -12,7 +12,20 @@
    
         <asp:Button ID="Button_Click" runat="server" Text="查询" 
             onclick="Button_Click_Click" />
-   
+            
+        
+        <p><table style:"border=1" style="border-style: inherit; border-width: inherit">
+        <thead>
+        <tr>
+        <td>1/1</td><td>1/2</td>
+        </tr>
+        <tr>
+        <td>2/1</td><td>2/2</td>
+        </tr>
+        </thead>
+        </table></p>
+            
+        
     </div>
     <div>
      
